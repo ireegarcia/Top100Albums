@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B42BD00251D396300964D42 /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B42BCFF251D396300964D42 /* Feed.swift */; };
+		0B42BD08251D398200964D42 /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B42BD07251D398200964D42 /* Album.swift */; };
 		0B82BC31251D28C200BA31F5 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B82BC30251D28C200BA31F5 /* API.swift */; };
 		0B82BC36251D290300BA31F5 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B82BC35251D290300BA31F5 /* Response.swift */; };
 		0B82BC40251D2BB300BA31F5 /* RssAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B82BC3F251D2BB300BA31F5 /* RssAPI.swift */; };
@@ -36,6 +38,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0B42BCFF251D396300964D42 /* Feed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
+		0B42BD07251D398200964D42 /* Album.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
 		0B82BC30251D28C200BA31F5 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		0B82BC35251D290300BA31F5 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		0B82BC3F251D2BB300BA31F5 /* RssAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssAPI.swift; sourceTree = "<group>"; };
@@ -98,6 +102,8 @@
 		0B82BC3A251D2B4B00BA31F5 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				0B42BCFF251D396300964D42 /* Feed.swift */,
+				0B42BD07251D398200964D42 /* Album.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -294,9 +300,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				0B82BC31251D28C200BA31F5 /* API.swift in Sources */,
+				0B42BD00251D396300964D42 /* Feed.swift in Sources */,
 				0B82BC40251D2BB300BA31F5 /* RssAPI.swift in Sources */,
 				0B82BC36251D290300BA31F5 /* Response.swift in Sources */,
 				0BC6DAE8251CE4D900DAEF72 /* AppDelegate.swift in Sources */,
+				0B42BD08251D398200964D42 /* Album.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
