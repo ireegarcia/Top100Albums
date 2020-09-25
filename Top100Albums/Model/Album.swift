@@ -9,13 +9,13 @@ import Foundation
 
 struct Album: Codable {
    let id: String
+   let name: String
    let artistName: String
    let url: URL
    let artworkUrl100: URL
    let genres: [Genres]
    // other info
    let releaseDate: String?
-   let name: String?
    let copyright: String?
    let artistId: String?
    let artistUrl: URL?
