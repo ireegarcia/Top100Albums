@@ -15,13 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       window =  UIWindow(frame: UIScreen.main.bounds)
       // TODO:
       window?.rootViewController = UIViewController()
-      window?.makeKeyAndVisible()
-      
-      // TEST:
-      RssAPI.topAlbums { response in
-         print(try? response.decode(as: Feed.Response.self))
-      }
-      
+      window?.makeKeyAndVisible()      
       return true
    }
 }

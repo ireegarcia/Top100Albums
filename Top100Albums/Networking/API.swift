@@ -5,7 +5,7 @@
 //  Created by Iree García on 24/09/20.
 //
 
-import Foundation
+import UIKit
 
 enum APIError: Error {
    case badURL
@@ -40,7 +40,7 @@ class API {
    ///  - SeeAlso: `Response` class.
    func request(_ url: URL?,
                 method: HTTPMethod,
-                mimeType: String = "application/json",
+                mimeType: String? = "application/json",
                 body: Data? = nil,
                 completion: @escaping (_ response: Response) -> Void) {
    
@@ -50,7 +50,9 @@ class API {
       
       var request = URLRequest(url: url)
       request.httpMethod = method.rawValue
-      request.addValue(mimeType, forHTTPHeaderField: "Content-Type")
+      if let mimeType = mimeType {
+         request.addValue(mimeType, forHTTPHeaderField: "Content-Type")
+      }
       request.httpBody = body
       
       session.dataTask(with: request) { data, response, error in
@@ -58,5 +60,41 @@ class API {
             completion(.init(data, response, error))
          }
       }.resume()
+   }
+   
+   // MARK: - Images
+   
+   let imageCache = NSCache<NSURL, UIImage>()
+   private var loadingImageResponses = [URL: [(UIImage?) -> Void]]()
+   
+   /// Specific method for fetching images, with cache and optimized for repeated requests fro the same image.
+   func image(_ url: URL?, completion: @escaping (_ image: UIImage?) -> Void) {
+      guard let url = url else {
+         return completion(nil)
+      }
+      // check for a cached image
+      if let cachedImage = imageCache.object(forKey: url as NSURL) {
+          return completion(cachedImage)
+      }
+      // enqueue requests for the same image
+      guard loadingImageResponses[url] == nil else {
+         loadingImageResponses[url]?.append(completion)
+         return
+      }
+      loadingImageResponses[url] = [completion]
+      
+      // NOTE: nil mimeType to let URLSession infer it from URL
+      request(url, method: .get, mimeType: nil) { response in
+         // get image from response
+         guard response.isSuccessful, let image = response.image,
+               let blocks = self.loadingImageResponses[url] else {
+            return completion(nil)
+         }
+         // cache the image and serve enqueued requests
+         self.imageCache.setObject(image, forKey: url as NSURL, cost: response.byteCount)
+         for block in blocks {
+            block(image)
+         }
+      }
    }
 }

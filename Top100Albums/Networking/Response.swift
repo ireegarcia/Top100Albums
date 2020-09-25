@@ -5,7 +5,7 @@
 //  Created by Iree García on 24/09/20.
 //
 
-import Foundation
+import UIKit
 
 class Response {
    let data: Data?
@@ -25,6 +25,11 @@ class Response {
    /// `statusCode` is 2xx
    var isSuccessful: Bool {
       error == nil && 200 ... 299 ~= statusCode
+   }
+   
+   /// The size of the response `data`.
+   var byteCount: Int {
+      data?.count ?? 0
    }
 }
 
@@ -47,6 +52,13 @@ extension Response {
    var string: String? {
       if let data = data {
          return String(data: data, encoding: .utf8)
+      }
+      return nil
+   }
+
+   var image: UIImage? {
+      if let data = data {
+         return UIImage(data: data)
       }
       return nil
    }

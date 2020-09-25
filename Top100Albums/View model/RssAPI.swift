@@ -5,7 +5,7 @@
 //  Created by Iree García on 24/09/20.
 //
 
-import Foundation
+import UIKit
 
 extension URL {
    static let topAlbums = URL(string: "https://rss.itunes.apple.com/api/v1/us/itunes-music/top-albums/all/100/explicit.json")
@@ -17,5 +17,9 @@ enum RssAPI {
    
    static func topAlbums(completion: @escaping (Response)->Void) {
       api.request(.topAlbums, method: .get, completion: completion)
+   }
+   
+   static func artwork(for album: Album, completion: @escaping (UIImage?)->Void) {
+      api.image(album.artworkUrl100, completion: completion)
    }
 }
