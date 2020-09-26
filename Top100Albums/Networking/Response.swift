@@ -39,6 +39,7 @@ extension Response {
    static let decoder: JSONDecoder = {
       let decoder = JSONDecoder()
       decoder.keyDecodingStrategy = .convertFromSnakeCase
+      decoder.dateDecodingStrategy = .custom(decodeDate)
       return decoder
    }()
 
@@ -61,5 +62,15 @@ extension Response {
          return UIImage(data: data)
       }
       return nil
+   }
+   
+   private static func decodeDate(decoder: Decoder) throws -> Date {
+      let container = try decoder.singleValueContainer()
+      let string = try container.decode(String.self)
+      guard let date = DateFormatter.knownFormatDate(from: string) else {
+         throw DecodingError.dataCorruptedError(
+            in: container, debugDescription: "Unrecognized date format: \(string)")
+      }
+      return date
    }
 }

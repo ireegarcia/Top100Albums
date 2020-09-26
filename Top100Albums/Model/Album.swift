@@ -14,8 +14,8 @@ struct Album: Codable {
    let url: URL
    let artworkUrl100: URL
    let genres: [Genres]
+   let releaseDate: Date?
    // other info
-   let releaseDate: String?
    let copyright: String?
    let artistId: String?
    let artistUrl: URL?
