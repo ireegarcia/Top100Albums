@@ -13,6 +13,8 @@ class FeedViewModel {
    
    init(feed: Feed) {
       title = feed.title
-      albums = feed.results.map { AlbumViewModel(album: $0) }
+      albums = feed.results.enumerated().map { i, album in
+         AlbumViewModel(album: album, rank: i + 1)
+      }
    }
 }

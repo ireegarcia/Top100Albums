@@ -17,15 +17,32 @@ class FeedViewController: UIViewController {
    
    override func loadView() {
       view = UIView()
+      view.backgroundColor = .appBackground
       
       tableView.dataSource = self
       tableView.delegate = self
+      tableView.cellLayoutMarginsFollowReadableWidth = true
       tableView.register(AlbumRow.self)
+      tableView.separatorStyle = .none
+      tableView.backgroundColor = view.backgroundColor
+      tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 5))
+      tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 15))
+      
       view.addSubview(tableView, pinTo: .safeArea)
    }
    
    override func viewDidLoad() {
       super.viewDidLoad()
+      
+      if let bar = navigationController?.navigationBar {
+         navigationItem.title = "💯💽"
+         bar.barTintColor = view.backgroundColor
+         bar.shadowImage = UIImage()
+         bar.isTranslucent = false
+         bar.titleTextAttributes = [
+            .font: UIFont.preferredFont(forTextStyle: .title1)
+         ]
+      }
       
       // get posts
       RssAPI.topAlbums { [weak self] response in
