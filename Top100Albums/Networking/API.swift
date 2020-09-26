@@ -20,7 +20,7 @@ enum HTTPMethod: String {
 
 /// High level networking object, agnostic of any implementation.
 class API {
-   let session: URLSession = {
+   var session: URLSession = {
       let config = URLSessionConfiguration.default
       config.allowsCellularAccess = true
       if #available(iOS 11.0, *) {
@@ -106,7 +106,6 @@ class API {
    /// Cancels the latest request associated with the given `url`.
    func cancel(_ url: URL?) {
       if let url = url {
-         print(#function, url)
          tasks[url]?.cancel()
          tasks.removeValue(forKey: url)
          loadingImageResponses.removeValue(forKey: url)

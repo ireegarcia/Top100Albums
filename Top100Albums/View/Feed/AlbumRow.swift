@@ -94,8 +94,7 @@ class AlbumRow: UITableViewCell {
          // don't overlap artwork with artist
          artistLabel.leadingAnchor.constraint(equalToSystemSpacingAfter: artworkImageView.trailingAnchor, multiplier: 1),
          // position ranking label
-         rankBox.leadingAnchor.constraint(equalTo: artworkImageView.leadingAnchor,
-                                          constant: .itemSpacing),
+         rankBox.leadingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leadingAnchor),
          rankBox.bottomAnchor.constraint(equalTo: artworkImageView.bottomAnchor,
                                           constant: .interlineSpacing),
       ])
