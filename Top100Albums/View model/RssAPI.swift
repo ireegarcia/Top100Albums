@@ -19,7 +19,11 @@ enum RssAPI {
       api.request(.topAlbums, method: .get, completion: completion)
    }
    
-   static func artwork(for album: Album, completion: @escaping (UIImage?)->Void) {
-      api.image(album.artworkUrl100, completion: completion)
+   static func artwork(url: URL, completion: @escaping (UIImage?)->Void) {
+      api.image(url, completion: completion)
+   }
+   
+   static func cancel(url: URL) {
+      api.cancel(url)
    }
 }

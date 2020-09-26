@@ -80,4 +80,20 @@ extension FeedViewController: UITableViewDataSource, UITableViewDelegate {
          }
       }
    }
+   
+   func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+      if case .album(let album) = rows[indexPath.row] {
+         RssAPI.artwork(url: album.artworkUrl) { image in
+            // `imageView` forwards to the actual artworkImageView to avoid casting
+            cell.imageView?.image = image
+         }
+      }
+   }
+   
+   func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+      // NOTE: cancel requests so the images don't end up in a wrong cell
+      if case .album(let album) = rows[indexPath.row] {
+         RssAPI.cancel(url: album.artworkUrl)
+      }
+   }
 }

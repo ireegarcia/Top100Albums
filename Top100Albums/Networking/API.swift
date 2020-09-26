@@ -29,6 +29,9 @@ class API {
       return URLSession(configuration: config)
    }()
    
+   /// Only the latest task for a URL. Mostly used for images, which avoid repeated requests.
+   private var tasks = [URL: URLSessionDataTask]()
+   
    /// General method to make network requests, obtaining the response information and the raw `Data`.
    /// - Parameters:
    ///   - url: The `URL` for the request. If `nil`, an `APIError.badURL` error will come in the response.
@@ -55,11 +58,13 @@ class API {
       }
       request.httpBody = body
       
-      session.dataTask(with: request) { data, response, error in
+      let task = session.dataTask(with: request) { data, response, error in
          DispatchQueue.main.async {
             completion(.init(data, response, error))
          }
-      }.resume()
+      }
+      tasks[url] = task
+      task.resume()
    }
    
    // MARK: - Images
@@ -95,6 +100,16 @@ class API {
          for block in blocks {
             block(image)
          }
+      }
+   }
+
+   /// Cancels the latest request associated with the given `url`.
+   func cancel(_ url: URL?) {
+      if let url = url {
+         print(#function, url)
+         tasks[url]?.cancel()
+         tasks.removeValue(forKey: url)
+         loadingImageResponses.removeValue(forKey: url)
       }
    }
 }

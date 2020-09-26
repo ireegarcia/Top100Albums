@@ -31,4 +31,9 @@ class FeedViewTests: XCTestCase {
       XCTAssertEqual(sut?.albums.first?.name, "ALBUM1", "Wrong album name")
       XCTAssertEqual(sut?.albums.last?.name, "ALBUM6", "Wrong album name")
    }
+   
+   func testRankText() throws {
+      XCTAssertEqual(sut?.albums.first?.rank, "1", "Wrong rank text")
+      XCTAssertEqual(sut?.albums.last?.rank, "6", "Wrong rank text")
+   }
 }
