@@ -36,7 +36,7 @@ class FeedViewController: UIViewController {
       
       if let bar = navigationController?.navigationBar {
          navigationItem.title = "💯💽"
-         bar.tintColor = .textOverlay
+         bar.tintColor = .text
          bar.backgroundColor = .clear
          bar.barTintColor = view.backgroundColor
          bar.shadowImage = UIImage()
@@ -57,6 +57,7 @@ class FeedViewController: UIViewController {
             .font: UIFont.preferredFont(forTextStyle: .title2),
             .backgroundColor: UIColor.textOverlay
          ], for: .normal)
+         backButton.tintColor = .textOverlay
          navigationItem.backBarButtonItem = backButton
       }
       

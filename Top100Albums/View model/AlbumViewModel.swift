@@ -19,6 +19,7 @@ class AlbumViewModel {
    let compactGenresText: String
    let copyright: String?
    let artworkUrl: URL
+   let iTunesButtonTitle = "See on iTunes"
    let iTunesUrl: URL
 
    init(album: Album, rank: Int) {

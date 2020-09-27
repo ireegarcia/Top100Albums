@@ -47,8 +47,7 @@ class AlbumRow: UITableViewCell {
       // label
       nameLabel.textColor = .text
       nameLabel.numberOfLines = 2
-      nameLabel.font = UIFontMetrics(forTextStyle: .headline)
-         .scaledFont(for: .systemFont(ofSize: 24, weight: .black))
+      nameLabel.font = .heavy
       nameLabel.textAlignment = .right
       nameLabel.adjustsFontSizeToFitWidth = true
       nameLabel.minimumScaleFactor = .minimumFontScale
