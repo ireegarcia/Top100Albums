@@ -96,4 +96,11 @@ extension FeedViewController: UITableViewDataSource, UITableViewDelegate {
          RssAPI.cancel(url: album.artworkUrl)
       }
    }
+   
+   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+      if case .album(let album) = rows[indexPath.row] {
+         let detail = AlbumDetailViewController(model: album)
+         navigationController?.pushViewController(detail, animated: true)
+      }
+   }
 }

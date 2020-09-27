@@ -1,5 +1,5 @@
 //
-//  Model+Tests.swift
+//  MockModel.swift
 //  Top100AlbumsTests
 //
 //  Created by Iree García on 24/09/20.

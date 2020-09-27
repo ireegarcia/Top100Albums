@@ -16,6 +16,11 @@ extension DateFormatter {
       locale = Locale(identifier: "en_US_POSIX")
    }
    
+   static let year = DateFormatter(format: "yyyy")
+   static let `default` = DateFormatter(format: "yyyy-MM-dd")
+   
+   // MARK: - Known formats
+
    static let knownFormats = ["yyyy-MM-dd", "yyyy"]
    static let formatters = knownFormats.map(DateFormatter.init)
    

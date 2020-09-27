@@ -19,9 +19,16 @@
 		0B42BD2F251D878100964D42 /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B42BCFF251D396300964D42 /* Feed.swift */; };
 		0B42BD30251D878100964D42 /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B42BD07251D398200964D42 /* Album.swift */; };
 		0B42BD35251D8C8E00964D42 /* artwork.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B42BD34251D8C8E00964D42 /* artwork.png */; };
-		0B42BD3D251D90DE00964D42 /* Model+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B42BD3C251D90DE00964D42 /* Model+Tests.swift */; };
+		0B42BD3D251D90DE00964D42 /* MockModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B42BD3C251D90DE00964D42 /* MockModel.swift */; };
 		0B42BD45251D9DFF00964D42 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B42BD44251D9DFF00964D42 /* FeedViewController.swift */; };
 		0B42BD4A251DA1DE00964D42 /* UITableView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B42BD49251DA1DE00964D42 /* UITableView+.swift */; };
+		0B7B0401251FFDDB0073F801 /* MockUIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B0400251FFDDB0073F801 /* MockUIApplication.swift */; };
+		0B7B0409252001F10073F801 /* NavigationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B0408252001F10073F801 /* NavigationTests.swift */; };
+		0B7B0410252003450073F801 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B42BD44251D9DFF00964D42 /* FeedViewController.swift */; };
+		0B7B04142520038B0073F801 /* UIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9E4E0D251E8CE000F79A7C /* UIConstants.swift */; };
+		0B7B0415252003900073F801 /* AlbumRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9E4DF7251DA44000F79A7C /* AlbumRow.swift */; };
+		0B7B041C252003A30073F801 /* UIView+AutoLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9E4DFC251DAB9600F79A7C /* UIView+AutoLayout.swift */; };
+		0B7B0420252003B30073F801 /* UITableView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B42BD49251DA1DE00964D42 /* UITableView+.swift */; };
 		0B82BC31251D28C200BA31F5 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B82BC30251D28C200BA31F5 /* API.swift */; };
 		0B82BC36251D290300BA31F5 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B82BC35251D290300BA31F5 /* Response.swift */; };
 		0B82BC40251D2BB300BA31F5 /* RssAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B82BC3F251D2BB300BA31F5 /* RssAPI.swift */; };
@@ -38,6 +45,10 @@
 		0BC6DAEE251CE4DB00DAEF72 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0BC6DAED251CE4DB00DAEF72 /* Assets.xcassets */; };
 		0BC6DAF4251CE4DB00DAEF72 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0BC6DAF2251CE4DB00DAEF72 /* LaunchScreen.storyboard */; };
 		0BC6DB0A251CE4DB00DAEF72 /* Top100AlbumsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BC6DB09251CE4DB00DAEF72 /* Top100AlbumsUITests.swift */; };
+		0BF4BD8E251FF7CA0047BA8E /* AlbumViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF4BD8D251FF7C90047BA8E /* AlbumViewTests.swift */; };
+		0BFA46E025200C1B008188A1 /* MockNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BFA46DF25200C1B008188A1 /* MockNavigationController.swift */; };
+		0BFA46E625200C88008188A1 /* AlbumDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BFA46E525200C88008188A1 /* AlbumDetailViewController.swift */; };
+		0BFA46E725200C88008188A1 /* AlbumDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BFA46E525200C88008188A1 /* AlbumDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,9 +76,11 @@
 		0B42BD20251D850000964D42 /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
 		0B42BD29251D858A00964D42 /* AlbumViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumViewModel.swift; sourceTree = "<group>"; };
 		0B42BD34251D8C8E00964D42 /* artwork.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = artwork.png; sourceTree = "<group>"; };
-		0B42BD3C251D90DE00964D42 /* Model+Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Model+Tests.swift"; sourceTree = "<group>"; };
+		0B42BD3C251D90DE00964D42 /* MockModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockModel.swift; sourceTree = "<group>"; };
 		0B42BD44251D9DFF00964D42 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		0B42BD49251DA1DE00964D42 /* UITableView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+.swift"; sourceTree = "<group>"; };
+		0B7B0400251FFDDB0073F801 /* MockUIApplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockUIApplication.swift; sourceTree = "<group>"; };
+		0B7B0408252001F10073F801 /* NavigationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationTests.swift; sourceTree = "<group>"; };
 		0B82BC30251D28C200BA31F5 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		0B82BC35251D290300BA31F5 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		0B82BC3F251D2BB300BA31F5 /* RssAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssAPI.swift; sourceTree = "<group>"; };
@@ -87,6 +100,9 @@
 		0BC6DB05251CE4DB00DAEF72 /* Top100AlbumsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Top100AlbumsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0BC6DB09251CE4DB00DAEF72 /* Top100AlbumsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Top100AlbumsUITests.swift; sourceTree = "<group>"; };
 		0BC6DB0B251CE4DB00DAEF72 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0BF4BD8D251FF7C90047BA8E /* AlbumViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumViewTests.swift; sourceTree = "<group>"; };
+		0BFA46DF25200C1B008188A1 /* MockNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNavigationController.swift; sourceTree = "<group>"; };
+		0BFA46E525200C88008188A1 /* AlbumDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +143,7 @@
 			children = (
 				0BC6DAF2251CE4DB00DAEF72 /* LaunchScreen.storyboard */,
 				0B9E4DF3251DA3CB00F79A7C /* Feed */,
+				0BFA46E425200C69008188A1 /* Album detail */,
 				0B42BD49251DA1DE00964D42 /* UITableView+.swift */,
 				0B9E4DFC251DAB9600F79A7C /* UIView+AutoLayout.swift */,
 				0B9E4E0D251E8CE000F79A7C /* UIConstants.swift */,
@@ -146,6 +163,7 @@
 		0B82BC3A251D2B4B00BA31F5 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				0B82BC3F251D2BB300BA31F5 /* RssAPI.swift */,
 				0B42BCFF251D396300964D42 /* Feed.swift */,
 				0B42BD07251D398200964D42 /* Album.swift */,
 			);
@@ -155,7 +173,6 @@
 		0B82BC3B251D2B5400BA31F5 /* View model */ = {
 			isa = PBXGroup;
 			children = (
-				0B82BC3F251D2BB300BA31F5 /* RssAPI.swift */,
 				0B42BD20251D850000964D42 /* FeedViewModel.swift */,
 				0B42BD29251D858A00964D42 /* AlbumViewModel.swift */,
 			);
@@ -171,14 +188,16 @@
 			path = Feed;
 			sourceTree = "<group>";
 		};
-		0B9E4E1C251EFB6B00F79A7C /* Utils */ = {
+		0B9E4E1C251EFB6B00F79A7C /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
-				0B42BD3C251D90DE00964D42 /* Model+Tests.swift */,
+				0B7B0400251FFDDB0073F801 /* MockUIApplication.swift */,
+				0B42BD3C251D90DE00964D42 /* MockModel.swift */,
 				0B42BD34251D8C8E00964D42 /* artwork.png */,
 				0B9E4E12251EF8D000F79A7C /* MockURLSession.swift */,
+				0BFA46DF25200C1B008188A1 /* MockNavigationController.swift */,
 			);
-			path = Utils;
+			path = Mocks;
 			sourceTree = "<group>";
 		};
 		0BC6DADB251CE4D900DAEF72 = {
@@ -222,7 +241,9 @@
 			children = (
 				0B42BD15251D82F600964D42 /* FeedViewTests.swift */,
 				0B9E4E17251EFB3800F79A7C /* APITests.swift */,
-				0B9E4E1C251EFB6B00F79A7C /* Utils */,
+				0B7B0408252001F10073F801 /* NavigationTests.swift */,
+				0BF4BD8D251FF7C90047BA8E /* AlbumViewTests.swift */,
+				0B9E4E1C251EFB6B00F79A7C /* Mocks */,
 				0BC6DB00251CE4DB00DAEF72 /* Info.plist */,
 			);
 			path = Top100AlbumsTests;
@@ -235,6 +256,14 @@
 				0BC6DB0B251CE4DB00DAEF72 /* Info.plist */,
 			);
 			path = Top100AlbumsUITests;
+			sourceTree = "<group>";
+		};
+		0BFA46E425200C69008188A1 /* Album detail */ = {
+			isa = PBXGroup;
+			children = (
+				0BFA46E525200C88008188A1 /* AlbumDetailViewController.swift */,
+			);
+			path = "Album detail";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -369,6 +398,7 @@
 			files = (
 				0B42BD21251D850000964D42 /* FeedViewModel.swift in Sources */,
 				0B9E4DFD251DAB9600F79A7C /* UIView+AutoLayout.swift in Sources */,
+				0BFA46E625200C88008188A1 /* AlbumDetailViewController.swift in Sources */,
 				0B42BD45251D9DFF00964D42 /* FeedViewController.swift in Sources */,
 				0B82BC31251D28C200BA31F5 /* API.swift in Sources */,
 				0B42BD4A251DA1DE00964D42 /* UITableView+.swift in Sources */,
@@ -390,15 +420,25 @@
 			files = (
 				0B392041251FC221005457CB /* Date+.swift in Sources */,
 				0B42BD2E251D870800964D42 /* AlbumViewModel.swift in Sources */,
+				0B7B0415252003900073F801 /* AlbumRow.swift in Sources */,
+				0BFA46E725200C88008188A1 /* AlbumDetailViewController.swift in Sources */,
 				0B42BD2F251D878100964D42 /* Feed.swift in Sources */,
 				0B42BD25251D854300964D42 /* FeedViewModel.swift in Sources */,
-				0B42BD3D251D90DE00964D42 /* Model+Tests.swift in Sources */,
+				0BFA46E025200C1B008188A1 /* MockNavigationController.swift in Sources */,
+				0B7B0409252001F10073F801 /* NavigationTests.swift in Sources */,
+				0B42BD3D251D90DE00964D42 /* MockModel.swift in Sources */,
+				0B7B0410252003450073F801 /* FeedViewController.swift in Sources */,
 				0B9E4E2A251EFE2800F79A7C /* API.swift in Sources */,
+				0B7B04142520038B0073F801 /* UIConstants.swift in Sources */,
 				0B9E4E13251EF8D000F79A7C /* MockURLSession.swift in Sources */,
+				0BF4BD8E251FF7CA0047BA8E /* AlbumViewTests.swift in Sources */,
 				0B42BD16251D82F600964D42 /* FeedViewTests.swift in Sources */,
+				0B7B0420252003B30073F801 /* UITableView+.swift in Sources */,
+				0B7B041C252003A30073F801 /* UIView+AutoLayout.swift in Sources */,
 				0B9E4E2E251EFE7600F79A7C /* Response.swift in Sources */,
 				0B9E4E23251EFE1000F79A7C /* RssAPI.swift in Sources */,
 				0B9E4E18251EFB3800F79A7C /* APITests.swift in Sources */,
+				0B7B0401251FFDDB0073F801 /* MockUIApplication.swift in Sources */,
 				0B42BD30251D878100964D42 /* Album.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
