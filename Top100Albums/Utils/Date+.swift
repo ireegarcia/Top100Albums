@@ -25,7 +25,6 @@ extension DateFormatter {
    static let formatters = knownFormats.map(DateFormatter.init)
    
    static func knownFormatDate(from string: String) -> Date? {
-      print(string)
       for (i, format) in knownFormats.enumerated() {
          // NOTE: simple approach for these formats. Regex is another option
          if string.count == format.count {

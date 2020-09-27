@@ -108,7 +108,7 @@ class AlbumRow: UITableViewCell {
       nameLabel.attributedText = NSAttributedString(
          string: model?.name ?? "",
          attributes: [
-            .backgroundColor: UIColor.white.withAlphaComponent(0.9)
+            .backgroundColor: UIColor.textOverlay
          ])
       artistLabel.text = model?.artistName
       rankLabel.text = model?.rank

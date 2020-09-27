@@ -16,11 +16,9 @@ class OpenURLIntent: NSObject {
    }
 }
 
-// MARK: -
+// MARK: Open URL
 
 extension UIApplication {
-
-   // MARK: Open URL
 
    static var nextOpenURLIntent: OpenURLIntent?
 
@@ -39,15 +37,5 @@ extension UIApplication {
       completion?(UIApplication.nextOpenURLIntent?.success ?? true)
       UIApplication.nextOpenURLIntent = nil
    }
-
-   // MARK: - Handle events
-   
-//   open override func target(forAction: Selector, withSender: Any?) -> Any? {
-//
-//   }
-   
-//   func sendAction(_ action: Selector, to target: Any?, from sender: Any?, for event: UIEvent?) -> Bool {
-//      print()
-//   }
 }
 
