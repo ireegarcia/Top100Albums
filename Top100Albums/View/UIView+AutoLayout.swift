@@ -12,13 +12,18 @@ enum LayoutPinOption {
    case readableContent
    case safeArea
    case bounds
+   /// - warning: Only for `UIScrollView`. Other classes will use `.bounds` instead.
+   case contentLayout
 }
 
 extension UIView {
-   func pin(_ view: UIView, to option: LayoutPinOption,
+   /// - parameter view: A `UIView` or a `UILayoutGuide` you want to pin to this view.
+   /// - parameter option: The guide to pin to. When `.contentLayout` is applied on a scroll view,
+   ///   the width of `view` will be pinned to its `frameLayoutGuide`.
+   func pin(_ view: LayoutAnchors, to option: LayoutPinOption,
             top: CGFloat? = 0, leading: CGFloat? = 0, trailing: CGFloat? = 0, bottom: CGFloat? = 0) {
       
-      view.translatesAutoresizingMaskIntoConstraints = false
+      (view as? UIView)?.translatesAutoresizingMaskIntoConstraints = false
       
       let anchors: LayoutAnchors
       switch option {
@@ -26,13 +31,21 @@ extension UIView {
       case .readableContent: anchors = readableContentGuide
       case .safeArea: anchors = safeAreaLayoutGuide
       case .bounds: anchors = self
+      case .contentLayout: anchors = (self as? UIScrollView)?.contentLayoutGuide ?? self
       }
-      let constraints: [NSLayoutConstraint?] = [
+      var constraints: [NSLayoutConstraint?] = [
          top.map { view.topAnchor.constraint(equalTo: anchors.topAnchor, constant: $0) },
          leading.map { view.leadingAnchor.constraint(equalTo: anchors.leadingAnchor, constant: $0) },
          trailing.map { anchors.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: $0) },
          bottom.map { anchors.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: $0) }
       ]
+      // equal widths in case of scrollView
+      if option == .contentLayout, let scrollView = self as? UIScrollView,
+         let leading = leading, let trailing = trailing {
+         constraints.append(view.widthAnchor.constraint(
+                              equalTo: scrollView.frameLayoutGuide.widthAnchor,
+                              constant: leading + trailing))
+      }
       // activate resulting constraints
       NSLayoutConstraint.activate(constraints.compactMap { $0 })
    }

@@ -9,13 +9,13 @@ import UIKit
 
 class AlbumDetailViewController: UIViewController {
    let artworkImageView = UIImageView(image: .artworkPlaceholder)
+   let scrollView = UIScrollView()
    let nameLabel = UILabel()
    let artistLabel = UILabel()
    let rankLabel = UILabel()
    let releasedDateLabel = UILabel()
    let genresLabel = UILabel()
    let copyrightLabel = UILabel()
-   
    let iTunesButton = UIButton(type: .custom)
    
    let model: AlbumViewModel
@@ -40,6 +40,43 @@ class AlbumDetailViewController: UIViewController {
       artworkImageView.tintColor = .separator
       artworkImageView.accessibilityIdentifier = "artwork"
       view.addSubview(artworkImageView)
+      
+      let contentView = UIView()
+      contentView.backgroundColor = .clear
+      scrollView.addSubview(contentView, pinTo: .contentLayout)
+      view.addSubview(scrollView)
+      loadScrollingContent(in: contentView)
+      
+      iTunesButton.backgroundColor = .text
+      iTunesButton.titleLabel?.font = .preferredFont(forTextStyle: .headline)
+      iTunesButton.setTitleColor(.white, for: .normal)
+      iTunesButton.contentEdgeInsets = .init(top: .marginCompact, left: .marginCompact,
+                                             bottom: .marginCompact, right: .marginCompact)
+      iTunesButton.accessibilityIdentifier = "iTunes"
+      view.addSubview(iTunesButton)
+      
+      // constraints
+      
+      view.pin(iTunesButton, to: .safeArea, top: nil, leading: 20, trailing: 20, bottom: 20)
+      
+      view.pin(artworkImageView, to: .bounds, bottom: nil)
+      // TODO: implement resizing
+      let artworkHeight = artworkImageView.heightAnchor.constraint(equalToConstant: 320)
+      
+      view.pin(scrollView, to: .layoutMargins, top: nil, bottom: nil)
+      let scrollTop = scrollView.topAnchor.constraint(equalTo: view.topAnchor)
+      let scrollBottom = iTunesButton.topAnchor.constraint(
+         equalTo: scrollView.bottomAnchor, constant: .marginCompact)
+      
+      NSLayoutConstraint.activate([
+         artworkHeight, scrollTop, scrollBottom
+      ])
+   }
+   
+   private func loadScrollingContent(in view: UIView) {
+      let artworkGuide = UILayoutGuide()
+      artworkGuide.identifier = "artwork-guide"
+      view.addLayoutGuide(artworkGuide)
       
       nameLabel.textColor = .text
       nameLabel.numberOfLines = 0
@@ -80,14 +117,6 @@ class AlbumDetailViewController: UIViewController {
       copyrightLabel.adjustsFontForContentSizeCategory = true
       copyrightLabel.accessibilityIdentifier = "copyright"
       
-      iTunesButton.backgroundColor = .text
-      iTunesButton.titleLabel?.font = .preferredFont(forTextStyle: .headline)
-      iTunesButton.setTitleColor(.white, for: .normal)
-      iTunesButton.contentEdgeInsets = .init(top: .marginCompact, left: .marginCompact,
-                                             bottom: .marginCompact, right: .marginCompact)
-      iTunesButton.accessibilityIdentifier = "iTunes"
-      view.addSubview(iTunesButton)
-      
       // grouping
 
       let rankBox = UIView()
@@ -101,7 +130,7 @@ class AlbumDetailViewController: UIViewController {
       artistBox.axis = .vertical
       artistBox.alignment = .trailing
       artistBox.distribution = .fill
-      artistBox.spacing = .itemSpacing
+      artistBox.spacing = .interlineSpacing
       artistBox.accessibilityIdentifier = "artist-date-box"
       view.addSubview(artistBox)
       
@@ -115,35 +144,34 @@ class AlbumDetailViewController: UIViewController {
       
       // constraints
       
-      view.pin(artworkImageView, to: .bounds, bottom: nil)
-
-      let artworkRatio = artworkImageView.heightAnchor.constraint(
-         equalTo: artworkImageView.widthAnchor)
-      artworkRatio.priority = .defaultHigh
-      let artworkMaxHeight = artworkImageView.heightAnchor.constraint(
-         lessThanOrEqualTo: view.heightAnchor, multiplier: 0.5)
+      view.pin(artworkGuide, to: .bounds, bottom: nil)
+      let artworkGuideHeight = artworkGuide.heightAnchor.constraint(
+         equalTo: self.view.widthAnchor)
+      artworkGuideHeight.priority = .defaultHigh
+      let artworkMaxHeight = artworkGuide.heightAnchor.constraint(
+         lessThanOrEqualTo: self.view.heightAnchor, multiplier: 0.5)
       
       rankBox.translatesAutoresizingMaskIntoConstraints = false
       let rankLeading = rankBox.leadingAnchor.constraint(
          equalTo: view.layoutMarginsGuide.leadingAnchor)
       let rankBottom = rankBox.bottomAnchor.constraint(
-         equalTo: artworkImageView.bottomAnchor,
+         equalTo: artworkGuide.bottomAnchor,
          constant: .interlineSpacing)
       
-      contentBox.translatesAutoresizingMaskIntoConstraints = false
-      let nameLeading = contentBox.leadingAnchor.constraint(
-         equalToSystemSpacingAfter: rankBox.trailingAnchor, multiplier: 1)
-      let nameTrailing = contentBox.trailingAnchor.constraint(
-         equalTo: view.layoutMarginsGuide.trailingAnchor)
-      let nameBoxVertical = copyrightLabel.topAnchor.constraint(
-         equalTo: artworkImageView.bottomAnchor, constant: .interlineSpacing)
+      view.pin(contentBox, to: .layoutMargins, top: nil, bottom: .marginCompact)
+      let contentBoxVertical = copyrightLabel.topAnchor.constraint(
+         equalTo: artworkGuide.bottomAnchor, constant: .interlineSpacing)
       
-      view.pin(iTunesButton, to: .safeArea, top: nil, leading: 20, trailing: 20, bottom: 20)
+      let nameLeading = nameLabel.leadingAnchor.constraint(
+         greaterThanOrEqualToSystemSpacingAfter: rankBox.trailingAnchor, multiplier: 1)
+      let copyrightLeading = copyrightLabel.leadingAnchor.constraint(
+         greaterThanOrEqualToSystemSpacingAfter: rankBox.trailingAnchor, multiplier: 1)
       
       NSLayoutConstraint.activate([
-         artworkRatio, artworkMaxHeight,
+         artworkGuideHeight, artworkMaxHeight,
          rankLeading, rankBottom,
-         nameLeading, nameTrailing, nameBoxVertical,
+         contentBoxVertical,
+         nameLeading, copyrightLeading
       ])
    }
    
