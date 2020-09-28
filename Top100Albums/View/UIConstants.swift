@@ -35,7 +35,7 @@ extension UIFont {
 }
 
 extension UIImage {
-   static let artworkPlaceholder = #imageLiteral(resourceName: "artwork-placeholder")
+   static let artworkPlaceholder = UIImage(named: "artwork-placeholder")
 }
 
 extension UIEdgeInsets {
