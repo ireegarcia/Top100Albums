@@ -47,8 +47,7 @@ class AlbumRow: UITableViewCell {
       // label
       nameLabel.textColor = .text
       nameLabel.numberOfLines = 2
-      nameLabel.font = UIFontMetrics(forTextStyle: .headline)
-         .scaledFont(for: .systemFont(ofSize: 24, weight: .black))
+      nameLabel.font = .heavy
       nameLabel.textAlignment = .right
       nameLabel.adjustsFontSizeToFitWidth = true
       nameLabel.minimumScaleFactor = .minimumFontScale
@@ -94,8 +93,7 @@ class AlbumRow: UITableViewCell {
          // don't overlap artwork with artist
          artistLabel.leadingAnchor.constraint(equalToSystemSpacingAfter: artworkImageView.trailingAnchor, multiplier: 1),
          // position ranking label
-         rankBox.leadingAnchor.constraint(equalTo: artworkImageView.leadingAnchor,
-                                          constant: .itemSpacing),
+         rankBox.leadingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leadingAnchor),
          rankBox.bottomAnchor.constraint(equalTo: artworkImageView.bottomAnchor,
                                           constant: .interlineSpacing),
       ])
@@ -109,7 +107,7 @@ class AlbumRow: UITableViewCell {
       nameLabel.attributedText = NSAttributedString(
          string: model?.name ?? "",
          attributes: [
-            .backgroundColor: UIColor.white.withAlphaComponent(0.9)
+            .backgroundColor: UIColor.textOverlay
          ])
       artistLabel.text = model?.artistName
       rankLabel.text = model?.rank

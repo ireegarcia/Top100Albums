@@ -36,12 +36,29 @@ class FeedViewController: UIViewController {
       
       if let bar = navigationController?.navigationBar {
          navigationItem.title = "💯💽"
+         bar.tintColor = .text
+         bar.backgroundColor = .clear
          bar.barTintColor = view.backgroundColor
          bar.shadowImage = UIImage()
-         bar.isTranslucent = false
+         bar.setBackgroundImage(UIImage(), for: .default)
+         bar.isTranslucent = true
          bar.titleTextAttributes = [
             .font: UIFont.preferredFont(forTextStyle: .title1)
          ]
+         // NOTE: only fix for icon misalignment
+         let backIcon = #imageLiteral(resourceName: "back").withAlignmentRectInsets(.init(top: 0, left: -10, bottom: 6, right: 0))
+            .withRenderingMode(.alwaysTemplate)
+         bar.backIndicatorImage = backIcon
+         bar.backIndicatorTransitionMaskImage = backIcon
+         
+         let backButton = UIBarButtonItem(title: navigationItem.title,
+                                          style: .plain, target: self, action: nil)
+         backButton.setTitleTextAttributes([
+            .font: UIFont.preferredFont(forTextStyle: .title2),
+            .backgroundColor: UIColor.textOverlay
+         ], for: .normal)
+         backButton.tintColor = .textOverlay
+         navigationItem.backBarButtonItem = backButton
       }
       
       // get posts
@@ -54,6 +71,11 @@ class FeedViewController: UIViewController {
             // TODO: show error
          }
       }
+   }
+   
+   override func viewWillAppear(_ animated: Bool) {
+      super.viewWillAppear(animated)
+      navigationController?.navigationBar.barStyle = .default
    }
    
    func reload() {
@@ -95,5 +117,13 @@ extension FeedViewController: UITableViewDataSource, UITableViewDelegate {
       if case .album(let album) = rows[indexPath.row] {
          RssAPI.cancel(url: album.artworkUrl)
       }
+   }
+   
+   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+      if case .album(let album) = rows[indexPath.row] {
+         let detail = AlbumDetailViewController(model: album)
+         navigationController?.pushViewController(detail, animated: true)
+      }
+      tableView.deselectRow(at: indexPath, animated: true)
    }
 }

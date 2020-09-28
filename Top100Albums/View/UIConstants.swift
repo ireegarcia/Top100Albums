@@ -24,11 +24,18 @@ extension UIColor {
    static let appBackground = UIColor(white: 0.985, alpha: 1)
    static let appTint = UIColor.red
    static let text = UIColor.black
+   static let secondaryText = UIColor.darkGray
+   static let textOverlay = UIColor.white.withAlphaComponent(0.9)
    static let separator = UIColor(white: 0.95, alpha: 1)
 }
 
+extension UIFont {
+   static let heavy: UIFont = UIFontMetrics(forTextStyle: .headline)
+      .scaledFont(for: .systemFont(ofSize: 24, weight: .black))
+}
+
 extension UIImage {
-   static let artworkPlaceholder = #imageLiteral(resourceName: "artwork-placeholder")
+   static let artworkPlaceholder = UIImage(named: "artwork-placeholder")
 }
 
 extension UIEdgeInsets {

@@ -13,15 +13,15 @@ struct Album: Codable {
    let artistName: String
    let url: URL
    let artworkUrl100: URL
-   let genres: [Genres]
+   let genres: [Genre]
+   let releaseDate: Date?
    // other info
-   let releaseDate: String?
    let copyright: String?
    let artistId: String?
    let artistUrl: URL?
 }
 
-struct Genres: Codable {
+struct Genre: Codable {
    let genreId: String
    let name: String
    let url: URL?
