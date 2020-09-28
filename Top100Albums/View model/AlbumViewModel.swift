@@ -19,6 +19,7 @@ class AlbumViewModel {
    let compactGenresText: String
    let copyright: String?
    let artworkUrl: URL
+   let largeArtworkUrl: URL
    let iTunesButtonTitle = "See on iTunes"
    let iTunesUrl: URL
 
@@ -41,6 +42,10 @@ class AlbumViewModel {
       
       copyright = album.copyright
       artworkUrl = album.artworkUrl100
+      // infer larger version of the artwork
+      // NOTE: it's a hack, but one normally has these endpoints available
+      let string = artworkUrl.absoluteString.replacingOccurrences(of: "200x200", with: "900x900")
+      largeArtworkUrl = URL(string: string) ?? album.artworkUrl100
       iTunesUrl = album.url
    }
 }

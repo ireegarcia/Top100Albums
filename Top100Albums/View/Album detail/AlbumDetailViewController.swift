@@ -10,6 +10,8 @@ import UIKit
 class AlbumDetailViewController: UIViewController {
    let artworkImageView = UIImageView(image: .artworkPlaceholder)
    let scrollView = UIScrollView()
+   /// Guides the bottom of the artwork, but it's inside the scrollable content
+   let artworkGuide = UILayoutGuide()
    let nameLabel = UILabel()
    let artistLabel = UILabel()
    let rankLabel = UILabel()
@@ -38,6 +40,7 @@ class AlbumDetailViewController: UIViewController {
       artworkImageView.contentMode = .scaleAspectFill
       artworkImageView.clipsToBounds = true
       artworkImageView.tintColor = .separator
+      artworkImageView.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
       artworkImageView.accessibilityIdentifier = "artwork"
       view.addSubview(artworkImageView)
       
@@ -55,13 +58,19 @@ class AlbumDetailViewController: UIViewController {
       iTunesButton.accessibilityIdentifier = "iTunes"
       view.addSubview(iTunesButton)
       
+      iTunesButton.addTarget(self, action: #selector(iTunesButtonHit),
+                             for: .touchUpInside)
+      
       // constraints
       
       view.pin(iTunesButton, to: .safeArea, top: nil, leading: 20, trailing: 20, bottom: 20)
       
       view.pin(artworkImageView, to: .bounds, bottom: nil)
-      // TODO: implement resizing
-      let artworkHeight = artworkImageView.heightAnchor.constraint(equalToConstant: 320)
+      let artworkBottom = artworkImageView.bottomAnchor.constraint(
+         equalTo: artworkGuide.bottomAnchor)
+      // it could become unsatisfiable if the guide goes beyond
+      // the top of the screen (negative height)
+      artworkBottom.priority = .defaultHigh
       
       view.pin(scrollView, to: .layoutMargins, top: nil, bottom: nil)
       let scrollTop = scrollView.topAnchor.constraint(equalTo: view.topAnchor)
@@ -69,12 +78,11 @@ class AlbumDetailViewController: UIViewController {
          equalTo: scrollView.bottomAnchor, constant: .marginCompact)
       
       NSLayoutConstraint.activate([
-         artworkHeight, scrollTop, scrollBottom
+         artworkBottom, scrollTop, scrollBottom
       ])
    }
    
    private func loadScrollingContent(in view: UIView) {
-      let artworkGuide = UILayoutGuide()
       artworkGuide.identifier = "artwork-guide"
       view.addLayoutGuide(artworkGuide)
       
@@ -86,6 +94,7 @@ class AlbumDetailViewController: UIViewController {
       nameLabel.minimumScaleFactor = .minimumFontScale
       nameLabel.adjustsFontForContentSizeCategory = true
       nameLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+      nameLabel.setContentCompressionResistancePriority(.required, for: .vertical)
       nameLabel.accessibilityIdentifier = "name"
       
       rankLabel.adjustsFontForContentSizeCategory = true
@@ -134,13 +143,15 @@ class AlbumDetailViewController: UIViewController {
       artistBox.accessibilityIdentifier = "artist-date-box"
       view.addSubview(artistBox)
       
-      let contentBox = UIStackView(arrangedSubviews: [nameLabel, copyrightLabel, artistBox, genresLabel])
-      contentBox.axis = .vertical
-      contentBox.alignment = .trailing
-      contentBox.distribution = .fill
-      contentBox.spacing = .marginMedium
-      contentBox.accessibilityIdentifier = "name-copyright-box"
-      view.addSubview(contentBox)
+      let labelsBox = UIStackView(arrangedSubviews: [
+         nameLabel, copyrightLabel, artistBox, genresLabel
+      ])
+      labelsBox.axis = .vertical
+      labelsBox.alignment = .trailing
+      labelsBox.distribution = .fill
+      labelsBox.spacing = .marginMedium
+      labelsBox.accessibilityIdentifier = "labels-box"
+      view.addSubview(labelsBox)
       
       // constraints
       
@@ -158,9 +169,13 @@ class AlbumDetailViewController: UIViewController {
          equalTo: artworkGuide.bottomAnchor,
          constant: .interlineSpacing)
       
-      view.pin(contentBox, to: .layoutMargins, top: nil, bottom: .marginCompact)
-      let contentBoxVertical = copyrightLabel.topAnchor.constraint(
+      view.pin(labelsBox, to: .layoutMargins, top: nil, bottom: .marginCompact)
+      let labelsBoxVertical = copyrightLabel.topAnchor.constraint(
          equalTo: artworkGuide.bottomAnchor, constant: .interlineSpacing)
+      labelsBoxVertical.priority = .defaultHigh
+      // if the nameLabel grows too big, it should still be visible
+      let labelsBoxTop = labelsBox.topAnchor.constraint(
+         greaterThanOrEqualTo: view.layoutMarginsGuide.topAnchor)
       
       let nameLeading = nameLabel.leadingAnchor.constraint(
          greaterThanOrEqualToSystemSpacingAfter: rankBox.trailingAnchor, multiplier: 1)
@@ -170,7 +185,7 @@ class AlbumDetailViewController: UIViewController {
       NSLayoutConstraint.activate([
          artworkGuideHeight, artworkMaxHeight,
          rankLeading, rankBottom,
-         contentBoxVertical,
+         labelsBoxVertical, labelsBoxTop,
          nameLeading, copyrightLeading
       ])
    }
@@ -206,7 +221,8 @@ class AlbumDetailViewController: UIViewController {
       copyrightLabel.text = model.copyright
       iTunesButton.setTitle(model.iTunesButtonTitle, for: .normal)
 
-      RssAPI.artwork(url: model.artworkUrl) { [weak self] image in
+      // load larger artwork
+      RssAPI.artwork(url: model.largeArtworkUrl) { [weak self] image in
          self?.artworkImageView.image = image
       }
    }
